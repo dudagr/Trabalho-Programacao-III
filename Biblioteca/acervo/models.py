@@ -8,6 +8,7 @@ class Livro(models.Model):
     disponivel = models.BooleanField(default=True)
     isbn = models.CharField(max_length=13, unique=True)
     genero = models.CharField(max_length=50)
-
+    editora = models.CharField(max_length=100)
+    
     def __str__(self):
         return self.titulo 
