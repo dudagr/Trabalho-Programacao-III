@@ -121,5 +121,9 @@ def livros(request, codigo):
             setattr(livro, nome, valor)
         livro.save()
         return JsonResponse(para_dict(livro))
+    
+    if request.method == "DELETE":
+        livro.delete()
+        return HttpResponse(status=204)
 
     return JsonResponse(para_dict(livro))
