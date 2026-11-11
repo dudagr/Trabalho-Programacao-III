@@ -23,7 +23,7 @@ def validar_livro(request, livro_atual=None):
     try:
         dados = json.loads(request.body)
     except json.JSONDecodeError:
-        return JsonResponse({"erro": "JSON inválido"}, status=400)
+        return None, JsonResponse({"erro": "JSON inválido"}, status=400)
 
     if not isinstance(dados, dict):
         return None, JsonResponse({"erro": "Envie um objeto JSON"}, status=400)
@@ -107,7 +107,7 @@ def lista_livros(request):
 @csrf_exempt
 def livros(request, codigo):
     try:
-        p = Livro.objects.get(pk=codigo)
+        livro = Livro.objects.get(pk=codigo)
     except Livro.DoesNotExist:
         return JsonResponse(
             {"erro": "Livro não encontrado"}, status=404
